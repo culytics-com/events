@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CULytics Events</title>
+
+<style>
+:root {
+    --navy: #1F2D4E;
+    --gold: #C49A22;
+    --accent-blue: #4A6FA5;
+    --white: #ffffff;
+    --off-white: #F7F6F3;
+}
+
+/* RESET */
+body {
+    margin: 0;
+    background: var(--off-white);
+}
+
+/* HEADER */
+.top-header {
+    padding: 15px 60px;
+    background: var(--white);
+}
+
+.logo-link img {
+    height: 60px;
+    display: block;
+}
+
+/* HERO */
+.hero {
+    height: 420px;
+    background: url('https://storage.ning.com/topology/rest/1.0/file/get/31147062856?profile=original') center/cover no-repeat;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.hero::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: rgba(31, 45, 78, 0.8);
+}
+
+.hero-content {
+    position: relative;
+    color: var(--white);
+    font-family: Georgia, serif;
+    text-align: center;
+}
+
+.hero-content h1 {
+    font-size: 52px;
+}
+
+/* NAVBAR */
+.navbar {
+    display: flex;
+    justify-content: center;
+    background: var(--gold);
+    position: relative;
+    z-index: 1000;
+}
+
+/* NAV ITEMS */
+.nav-item {
+    position: relative;
+}
+
+.nav-item > a {
+    display: block;
+    padding: 18px 40px;
+    text-decoration: none;
+    color: #000;
+    font-weight: bold;
+    font-family: Arial, sans-serif;
+    position: relative;
+}
+
+/* UNDERLINE */
+.nav-item > a::after {
+    content: "";
+    position: absolute;
+    left: 25%;
+    bottom: 8px;
+    width: 0%;
+    height: 2px;
+    background: var(--accent-blue);
+    transition: 0.3s;
+}
+
+/* HOVER */
+.nav-item > a:hover {
+    color: var(--accent-blue);
+}
+
+.nav-item > a:hover::after {
+    width: 50%;
+}
+
+/* ACTIVE */
+.nav-item.active > a {
+    color: var(--accent-blue);
+}
+
+.nav-item.active > a::after {
+    width: 50%;
+}
+
+/* DIVIDERS */
+.nav-item:not(:last-child)::before {
+    content: "";
+    position: absolute;
+    right: 0;
+    top: 25%;
+    height: 50%;
+    width: 1px;
+    background: rgba(0,0,0,0.2);
+}
+
+/* DROPDOWN */
+.submenu {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background: var(--white);
+    min-width: 260px;
+    display: none;
+    flex-direction: column;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+    border-top: 3px solid var(--gold);
+    z-index: 2000;
+}
+
+.submenu a {
+    padding: 14px 20px;
+    text-decoration: none;
+    color: var(--navy);
+    border-bottom: 1px solid #eee;
+}
+
+.submenu a:hover {
+    background: var(--off-white);
+    color: var(--accent-blue);
+}
+
+.dropdown:hover .submenu {
+    display: flex;
+}
+
+/* CONTENT GRID */
+.events-container {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 30px;
+    padding: 70px 80px;
+}
+
+/* LINK WRAPPER */
+.event-link {
+    text-decoration: none;
+}
+
+/* CARD */
+.event-card {
+    height: 320px;
+    position: relative;
+    border-radius: 12px;
+    overflow: hidden;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+}
+
+/* IMAGE */
+.event-card::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-size: cover;
+    background-position: center;
+    transition: transform 0.5s ease;
+}
+
+/* OVERLAY */
+.event-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+        rgba(31,45,78,0.6),
+        rgba(31,45,78,0.9)
+    );
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-family: Georgia, serif;
+    transition: 0.3s ease;
+}
+
+.event-overlay h2 {
+    font-size: 28px;
+}
+
+/* 🔥 HOVER EFFECT */
+.event-card:hover {
+    transform: translateY(-6px);
+}
+
+.event-card:hover::before {
+    transform: scale(1.1);
+}
+
+.event-card:hover .event-overlay {
+    background: linear-gradient(
+        rgba(196,154,34,0.85),
+        rgba(196,154,34,0.65)
+    );
+}
+
+/* BACKGROUNDS */
+.summit::before {
+    background-image: url('https://storage.ning.com/topology/rest/1.0/file/get/31147059462?profile=original');
+}
+.upcoming::before {
+    background-image: url('https://storage.ning.com/topology/rest/1.0/file/get/31147059091?profile=original');
+}
+.day::before {
+    background-image: url('https://storage.ning.com/topology/rest/1.0/file/get/31147059475?profile=RESIZE_930x');
+}
+
+/* RESPONSIVE */
+@media (max-width: 900px) {
+    .events-container {
+        grid-template-columns: 1fr;
+        padding: 30px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<!-- HEADER -->
+<div class="top-header">
+    <a href="https://culytics.com/" class="logo-link">
+        <img src="https://storage.ning.com/topology/rest/1.0/file/get/31147042876?profile=RESIZE_400x" alt="CULytics Logo">
+    </a>
+</div>
+
+<!-- HERO -->
+<div class="hero">
+    <div class="hero-content">
+        <h1>CULytics Events</h1>
+    </div>
+</div>
+
+<!-- NAVBAR -->
+<nav class="navbar">
+
+    <div class="nav-item">
+        <a href="https://culytics.com/consulting">Targeted Consulting</a>
+    </div>
+
+    <div class="nav-item dropdown">
+        <a href="#">Transformation Center</a>
+        <div class="submenu">
+            <a href="https://culytics.com/content-library">Content Library</a>
+            <a href="https://culytics.com/blogs">Blogs</a>
+            <a href="https://culytics.com/membership">Membership</a>
+            <a href="https://culytics.com/assessments">Assessments</a>
+            <a href="https://culytics.com/blogs/cu-peer-benchmark">CU Peer Benchmark</a>
+            <a href="https://culytics.com/blogs/peer-comparison-dashboard-marketing">CU Peer - Mkt Dashboard</a>
+        </div>
+    </div>
+
+    <div class="nav-item active">
+        <a href="#">Events</a>
+    </div>
+
+    <div class="nav-item">
+        <a href="https://culytics.com/partner-program">Partners</a>
+    </div>
+
+</nav>
+
+<!-- CONTENT -->
+<div class="events-container">
+
+    <a href="https://events.culytics.com/" class="event-link">
+        <div class="event-card upcoming">
+            <div class="event-overlay">
+                <h2>Upcoming Events</h2>
+            </div>
+        </div>
+    </a>
+
+    <a href="summit.html" class="event-link">
+        <div class="event-card summit">
+            <div class="event-overlay">
+                <h2>CULytics Summits</h2>
+            </div>
+        </div>
+    </a>
+
+    <a href="culytics-day.html" class="event-link">
+        <div class="event-card day">
+            <div class="event-overlay">
+                <h2>CULytics Day</h2>
+            </div>
+        </div>
+    </a>
+
+</div>
+
+</body>
+</html>
